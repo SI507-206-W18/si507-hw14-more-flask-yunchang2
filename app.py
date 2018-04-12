@@ -20,6 +20,22 @@ def postentry():
     model.add_entry(name, message)
     return redirect("/")
 
+@app.route("/admin")
+def admin():
+    return render_template("admin.html", entries = model.get_entries())
+
+# delete according to the ID of each post
+# past ID when submit the form
+# create a unique ID to each post
+@app.route("/delete", methods=["POST"] )
+def delete():
+    #print("delect action")
+    id_num = request.form["ID_num"]
+    model.delete_entry(id_num)
+    #return render_template("admin.html", entries = model.get_entries())
+    return redirect('/admin') # the same
+
+
 if __name__=="__main__":
     model.init()
     app.run(debug=True)

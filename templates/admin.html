@@ -1,0 +1,24 @@
+
+<link rel="stylesheet" href="/static/style.css">
+
+<h1> Welcome to my guestbook! </h1>
+
+<p><a href="/add">Add a message</a></p>
+
+{% for e in entries %}
+    <div class="entry">
+        <p class="entrytext"> {{e['text']}} </p>
+        <p class="metadata"> by {{e['author']}} on {{e['timestamp']}} </p>
+    </div>
+
+<!-- show the ID in each post-->
+    <h1>{{e['ID']}}</h1>
+
+<!-- action means what happen after click this buttom-->
+    <form action="/delete" method="POST">
+        <!-- show X in bottom -->
+        <input type="submit" name="delete" value='X'/>
+        <!-- get real ID but it is hidden -->
+        <input type="hidden" name="ID_num" value='{{e['ID']}}'/>
+    </form>
+{% endfor %}
